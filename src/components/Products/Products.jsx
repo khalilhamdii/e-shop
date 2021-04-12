@@ -3,8 +3,22 @@ import { Grid } from '@material-ui/core';
 import Product from './Product/Product';
 
 const products = [
-  { id: 1, name: 'Shoes', description: 'Running shoes', price: '$5' },
-  { id: 2, name: 'Macbook', description: 'Apple macbook', price: '$10' },
+  {
+    id: 1,
+    name: 'Shoes',
+    description: 'Running shoes',
+    price: '$5',
+    image:
+      'https://www.rei.com/dam/content_team_010818_52427_htc_running_shoes_hero2_lg.jpg',
+  },
+  {
+    id: 2,
+    name: 'Macbook',
+    description: 'Apple macbook',
+    price: '$10',
+    image:
+      'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-air-gold-select-201810?wid=892&hei=820&&qlt=80&.v=1603332211000',
+  },
 ];
 
 const Products = () => {
