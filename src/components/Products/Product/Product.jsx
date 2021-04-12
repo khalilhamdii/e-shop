@@ -37,7 +37,7 @@ const Product = ({ product }) => {
       </CardContent>
       <CardActions disableSpacing className={classes.cardActions}>
         <IconButton aria-label="Add to Cart">
-          <AddShoppingCart />
+          <AddShoppingCart className={classes.shoppingCartIcon} />
         </IconButton>
       </CardActions>
     </Card>

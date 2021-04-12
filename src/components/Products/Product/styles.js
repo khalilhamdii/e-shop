@@ -16,4 +16,7 @@ export default makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  shoppingCartIcon: {
+    color: '#ffc107',
+  },
 }));
