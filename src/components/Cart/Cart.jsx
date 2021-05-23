@@ -6,12 +6,17 @@ import useStyles from './styles';
 import CartItem from './CartItem/CartItem';
 import { Link } from 'react-router-dom';
 
-const Cart = ({ cart }) => {
+const Cart = ({
+  cart,
+  handleUpdateCartQty,
+  handleRemoveFromCart,
+  handleEmptyCart,
+}) => {
   const classes = useStyles();
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no item in your shopping cart,{' '}
+      You have no item in your shopping cart,
       <Link to="/" className={classes.link}>
         start adding some
       </Link>
@@ -24,7 +29,11 @@ const Cart = ({ cart }) => {
       <Grid container spacing={3}>
         {cart.line_items.map((item) => (
           <Grid item xs={12} sm={4} key={item.id}>
-            <CartItem item={item} />
+            <CartItem
+              item={item}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
+            />
           </Grid>
         ))}
       </Grid>
@@ -39,6 +48,7 @@ const Cart = ({ cart }) => {
             type="button"
             variant="contained"
             color="secondary"
+            onClick={handleEmptyCart}
           >
             Empty Cart
           </Button>
@@ -48,8 +58,9 @@ const Cart = ({ cart }) => {
             type="button"
             variant="contained"
             color="primary"
+            disabled
           >
-            Empty Cart
+            Checkout
           </Button>
         </div>
       </div>
@@ -59,19 +70,23 @@ const Cart = ({ cart }) => {
   if (!cart.line_items) return 'Loading...';
 
   return (
-    <Container>
-      <div className={classes.toolBar} />
-      <Typography className={classes.title} variant="h3" gutterBottom>
-        Your Shopping Cart
-      </Typography>
-      <Box my={2}>
-        <Button component={Link} to="/">
-          <Reply fontSize="large" />
-          Go back
-        </Button>
-      </Box>
-      {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
-    </Container>
+    <Box pb={12}>
+      <Container>
+        <div className={classes.toolBar} />
+        <Box mt={12}>
+          <Typography variant="h3" gutterBottom>
+            Your Shopping Cart
+          </Typography>
+        </Box>
+        <Box my={2}>
+          <Button component={Link} to="/">
+            <Reply fontSize="large" />
+            Go back
+          </Button>
+        </Box>
+        {!cart.line_items.length ? <EmptyCart /> : <FilledCart />}
+      </Container>
+    </Box>
   );
 };
 

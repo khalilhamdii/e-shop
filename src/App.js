@@ -17,9 +17,27 @@ const App = () => {
   };
 
   const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    console.log(item);
-    setCart(item.cart);
+    const { cart } = await commerce.cart.add(productId, quantity);
+
+    setCart(cart);
+  };
+
+  const handleUpdateCartQty = async (lineItemId, quantity) => {
+    const { cart } = await commerce.cart.update(lineItemId, { quantity });
+
+    setCart(cart);
+  };
+
+  const handleRemoveFromCart = async (lineItemId) => {
+    const { cart } = await commerce.cart.remove(lineItemId);
+
+    setCart(cart);
+  };
+
+  const handleEmptyCart = async () => {
+    const { cart } = await commerce.cart.empty();
+
+    setCart(cart);
   };
 
   useEffect(() => {
@@ -36,7 +54,12 @@ const App = () => {
             <Products products={products} onAddToCart={handleAddToCart} />
           </Route>
           <Route exact path="/cart">
-            <Cart cart={cart} />
+            <Cart
+              cart={cart}
+              handleUpdateCartQty={handleUpdateCartQty}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleEmptyCart={handleEmptyCart}
+            />
           </Route>
         </Switch>
       </div>
